@@ -1,0 +1,18 @@
+# Terraform state records every resource id and stores values marked `sensitive`
+# — including the generated dispatch token — in plaintext. Matched anywhere
+# under this directory, not just in terraform/, because running terraform from
+# the example root drops a state file here instead.
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfplan
+**/.terraform/
+**/.terraform.lock.hcl
+*.tfstate
+
+# Real variable values. terraform.tfvars.example is the committed template.
+**/terraform.tfvars
+
+# The example app's dependencies are installed inside the image.
+app/vendor/
+app/.env
+app/storage/logs/*.log

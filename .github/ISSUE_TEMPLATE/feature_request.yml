@@ -1,0 +1,34 @@
+name: Feature request
+description: Suggest a change or an addition
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the situation you are in, not just the solution you have in mind.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Does this affect the public API?
+      description: See the backward compatibility section of the README.
+      options:
+        - label: Changes a contract in `src/Contracts`
+        - label: Changes the `config/stateless-queue.php` schema
+        - label: Changes the JSON wire format
+        - label: Adds a new provider adapter

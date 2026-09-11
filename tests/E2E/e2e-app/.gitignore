@@ -1,0 +1,9 @@
+/vendor/
+.env.backup
+.phpunit.result.cache
+storage/framework/cache/*
+storage/framework/sessions/*
+storage/framework/views/*
+!storage/framework/.gitkeep
+!storage/logs/.gitkeep
+!storage/logs/laravel.log

@@ -1,0 +1,73 @@
+name: E2E Integration Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      # 1. Start Docker in a true background thread! 
+      # The '&' forces the runner to move to the next step immediately.
+      - name: Start Emulators in Background
+        run: cd ./tests/E2E/ && docker compose up -d &
+
+      # 2. Set up PHP (Runs in parallel with Docker pulls)
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+
+      # 3. Install root dependencies (Runs in parallel)
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      # 4. Install e2e-app dependencies (Runs in parallel)
+      - name: Install e2e-app dependencies
+        run: composer install --prefer-dist --no-progress --no-interaction
+        working-directory: ./tests/E2E/e2e-app
+
+      # 5. Wait for the background Docker process to finish!
+      # We check the ports to ensure they are actually ready to accept traffic.
+      - name: Wait for Emulators to be Ready
+        run: |
+          echo "Waiting for LocalStack to wake up..."
+          while ! nc -z localhost 4566; do   
+            sleep 2
+          done
+          echo "LocalStack is ready!"
+
+          echo "Waiting for Pub/Sub Emulator to wake up..."
+          while ! nc -z localhost 8085; do   
+            sleep 2
+          done
+          echo "Pub/Sub is ready!"
+
+      # 6. Run the E2E tests
+      - name: Run E2E tests
+        run: |
+          # Create dummy GCP credentials
+          cat << 'EOF' > /tmp/dummy-gcp-credentials.json
+          {
+            "type": "service_account",
+            "project_id": "local-dummy-project",
+            "private_key_id": "dummy-key-id",
+            "private_key": "-----BEGIN PRIVATE KEY-----\nANY_DUMMY_STRING_WILL_WORK_HERE\n-----END PRIVATE KEY-----\n",
+            "client_email": "dummy@local-dummy-project.iam.gserviceaccount.com",
+            "client_id": "123456789",
+            "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+            "token_uri": "https://oauth2.googleapis.com/token",
+            "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+            "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dummy%40local-dummy-project.iam.gserviceaccount.com"
+          }
+          EOF
+          export GOOGLE_APPLICATION_CREDENTIALS=/tmp/dummy-gcp-credentials.json
+
+          chmod +x ./tests/E2E/e2e-test.sh
+          ./tests/E2E/e2e-test.sh

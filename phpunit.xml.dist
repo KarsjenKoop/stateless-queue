@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         executionOrder="random"
+         failOnWarning="true"
+         failOnRisky="true"
+         failOnEmptyTestSuite="true"
+         beStrictAboutOutputDuringTests="true"
+>
+    <testsuites>
+        <testsuite name="Stateless Queue Test Suite">
+            <directory>tests</directory>
+            <exclude>tests/E2E/e2e-app</exclude>
+        </testsuite>
+    </testsuites>
+    <php>
+        <env name="APP_KEY" value="base64:2fl+Ktvkfl+Fuz4Qh/LX1iw8XV+n5MvdmbT54YFq+5U="/>
+        <env name="DB_CONNECTION" value="testing"/>
+        <env name="STATELESS_QUEUE_ADAPTER" value="null"/>
+        <env name="APP_ENV" value="testing"/>
+        <env name="PUBSUB_EMULATOR_HOST" value="localhost:8085"/>
+        <env name="GOOGLE_CLOUD_PROJECT" value="local-dummy-project"/>
+        <env name="GOOGLE_APPLICATION_CREDENTIALS" value="tests/dummy-credentials.json"/>
+    </php>
+    
+</phpunit>

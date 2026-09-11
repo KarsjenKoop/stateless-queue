@@ -1,0 +1,22 @@
+/vendor
+Note.md
+.phpunit.result.cache
+.phpunit.cache
+composer.lock
+/coverage
+e2e-app/storage/logs
+.DS_Store
+/.cursor
+/tests/E2E/e2e-app/storage/logs
+
+# Terraform working files. At the repository root, not only inside the example:
+# an untracked examples/ tree survives a branch switch while the .gitignore
+# inside it does not, so `git add -A` on a branch that has no examples/
+# directory will happily stage a 114 MB provider binary and a state file
+# containing the generated dispatch token.
+**/.terraform/
+**/.terraform.lock.hcl
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfplan
+**/terraform.tfvars

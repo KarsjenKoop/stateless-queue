@@ -1,0 +1,17 @@
+# Copy to terraform.tfvars and fill in.
+#
+# project_id has no default on purpose: gcloud carries an ambient default
+# project, and a default here would let an apply land somewhere unintended.
+
+project_id = "your-project-id"
+region     = "europe-west1"
+
+# Set by deploy.sh after it builds and pushes. Only set it by hand if you are
+# running terraform directly against an image that already exists.
+# image = "europe-west1-docker.pkg.dev/your-project-id/stateless-queue-example/app:latest"
+
+# service_name       = "stateless-queue-example"
+# default_topic_name = "stateless-default"
+# custom_topic_name  = "stateless-notifications"   # must match NotifySlackJob
+# min_instances      = 0
+# max_instances      = 3
