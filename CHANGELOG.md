@@ -8,7 +8,9 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 See the [backward compatibility policy](README.md#versioning-and-backward-compatibility) for what is
 covered by SemVer.
 
-## [Unreleased]
+## [1.0.0] - 2026-09-11
+
+First public release.
 
 ### Added
 
@@ -94,4 +96,4 @@ covered by SemVer.
 - `composer.lock` is no longer tracked; this is a library and resolves against the consumer's
   constraints.
 
-[Unreleased]: https://github.com/KarsjenKoop/stateless-queue/commits/main
+[1.0.0]: https://github.com/KarsjenKoop/stateless-queue/releases/tag/v1.0.0
