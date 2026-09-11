@@ -8,6 +8,13 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 See the [backward compatibility policy](README.md#versioning-and-backward-compatibility) for what is
 covered by SemVer.
 
+## [1.0.1] - 2026-09-11
+
+Re-release of 1.0.0 with no code changes. The 1.0.0 tag was rewritten after publication, which
+Packagist's stable-version immutability rule blocks, leaving that release pinned to a commit that no
+longer exists upstream. 1.0.1 is the first release to use for new installs; its tree is identical to
+1.0.0.
+
 ## [1.0.0] - 2026-09-11
 
 First public release.
@@ -96,4 +103,5 @@ First public release.
 - `composer.lock` is no longer tracked; this is a library and resolves against the consumer's
   constraints.
 
+[1.0.1]: https://github.com/KarsjenKoop/stateless-queue/releases/tag/v1.0.1
 [1.0.0]: https://github.com/KarsjenKoop/stateless-queue/releases/tag/v1.0.0
