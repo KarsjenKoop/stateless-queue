@@ -35,7 +35,7 @@
         "google/cloud-pubsub": "^2.0",
         "aws/aws-sdk-php": "^3.0",
         "google/auth": "^1.50",
-        "phpseclib/phpseclib": "^3.0",
+        "phpseclib/phpseclib": "^3.0 || ^4.0",
         "aws/aws-php-sns-message-validator": "^1.10"
     },
     "require-dev": {
